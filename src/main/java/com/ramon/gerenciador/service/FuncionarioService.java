@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ramon.gerenciador.exception.FuncionarioNaoEncontradoException;
 import com.ramon.gerenciador.model.Funcionario;
 import com.ramon.gerenciador.repository.FuncionarioRepository;
 
@@ -33,7 +34,7 @@ public class FuncionarioService {
 
     public Funcionario buscar(Long id){
         return funcionarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new FuncionarioNaoEncontradoException("Cliente com id:" + id +"  não encontrado"));
     }
 
     public void excluir(Long id){
